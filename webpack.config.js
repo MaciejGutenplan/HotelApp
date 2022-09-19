@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "bundle.js",
+    filename: 'bundle.[contenthash].js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        use: "url-loader"
+        type: 'asset'
       },
       {
         test: /\.tsx?$/,
