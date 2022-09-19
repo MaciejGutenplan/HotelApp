@@ -9,3 +9,15 @@ export const modalStyle = {
     boxShadow: 24,
     p: 4,
 };
+
+export const tableStyle = {
+    minWidth: 650
+}
+
+export const tableContainerStyle = {
+    paddingBottom: '15px'
+}
+
+export const formStyle = {
+    '& .MuiTextField-root': { m: 1, width: '25ch' }
+}

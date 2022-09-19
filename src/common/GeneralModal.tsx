@@ -4,15 +4,14 @@ import { Box, Modal } from "@mui/material";
 import { modalStyle } from "./styles";
 import { ModalProps } from "./types";
 
-export const EditModal = (props: ModalProps) => {
+export const GeneralModal = (props: ModalProps) => {
+
+    const { open, handleClose, children } = props
 
     return(
-        <Modal
-            open={props.open}
-            onClose={() => props.handleClose()}
-        >
+        <Modal open={open} onClose={() => handleClose()} >
             <Box sx={modalStyle}>
-
+                { children }
             </Box>
         </Modal>
     )
