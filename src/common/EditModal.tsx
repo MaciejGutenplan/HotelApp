@@ -1,10 +1,10 @@
 import React from 'react';
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 
-import { HotelModalProps } from "../types";
-import { modalStyle } from "../styles";
+import { modalStyle } from "./styles";
+import { ModalProps } from "./types";
 
-export const EditModal = (props: HotelModalProps) => {
+export const EditModal = (props: ModalProps) => {
 
     return(
         <Modal

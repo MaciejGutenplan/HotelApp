@@ -1,29 +1,8 @@
-import React, { useState } from "react";
-import {
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow
-} from "@mui/material";
+import React from "react";
+import { GeneralTable } from "../../common/GeneralTable";
 
 export const CitiesTable = () => {
 
-    return (
-        <>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="city table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>City</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </>
-    )
+    return ( <GeneralTable columns={['City', 'Country name']} data={[{name: '', country: ''}]} /> )
+
 }
