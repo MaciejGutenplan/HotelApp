@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
 import store from "Store/store";
-import { CountryPayload } from "../types";
 import { addCountry } from "Store/country/actions";
 import { TextField } from "Common/inputs/TextField";
 import { HOME_PAGE } from "../../constants/routes";
@@ -12,25 +12,29 @@ export const CountriesForm = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        const target = event.target as typeof event.target & CountryPayload
-        store.dispatch(addCountry({
-            id: 0,
-            name: target.name.value
-        }))
-        navigate(HOME_PAGE)
-    }
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+        },
+        onSubmit: values => {
+            store.dispatch(addCountry({
+                id: 0,
+                name: values.name
+            }))
+            navigate(HOME_PAGE)
+        },
+    });
 
     return(
-        <Form handleSubmit={handleSubmit} >
+        <Form handleSubmit={formik.handleSubmit} >
             <TextField
                 required
-                id="country-name"
+                id="name"
                 name="name"
                 label="Country name"
                 inputProps={{ maxLength: 30 }}
-                value=""
+                onChange={formik.handleChange}
+                value={formik.values.name}
             />
         </Form>
     )

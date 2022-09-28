@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from "@mui/material";
+import { useFormik } from "formik";
 
-import { CountryModalProps, CountryPayload } from "../types";
+import { CountryModalProps } from "../types";
 import store from "Store/store";
 import { editCountry } from "Store/country/actions";
 import { TextField } from "Common/inputs/TextField";
@@ -12,30 +13,33 @@ export const CountryModal = (props: CountryModalProps) => {
 
     const { record, open, handleClose } = props
 
-    const handleEdit = (event: React.FormEvent) => {
-        event.preventDefault();
-        const target = event.target as typeof event.target & CountryPayload
-
-        store.dispatch(editCountry({
+    const formik = useFormik({
+        initialValues: {
             id: record.id,
-            name: target.name.value
-        }))
-
-        handleClose()
-    }
+            name: record.name
+        },
+        onSubmit: values => {
+            store.dispatch(editCountry({
+                id: record.id,
+                name: values.name
+            }))
+            handleClose()
+        },
+    });
 
     const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
 
     return(
         <Modal open={open} handleClose={handleClose}>
-            <Form handleSubmit={handleEdit} closeButton={closeButton} >
+            <Form handleSubmit={formik.handleSubmit} closeButton={closeButton} >
                 <TextField
                     required
                     id="country-name"
                     name="name"
                     label="Country name"
                     inputProps={{ maxLength: 30 }}
-                    value={ record.name }
+                    value={ formik.values.name }
+                    onChange={formik.handleChange}
                 />
             </Form>
         </Modal>

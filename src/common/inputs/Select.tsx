@@ -5,7 +5,7 @@ import { SelectProps } from "../types";
 
 export const Select = (props: SelectProps) => {
 
-    const { id, name, label, defaultValue, options, required, helperText, onChangeEvent } = props
+    const { id, name, label, value, options, required, helperText, onChangeEvent } = props
 
     return(
         <TextField
@@ -13,12 +13,10 @@ export const Select = (props: SelectProps) => {
             id={id}
             name={name}
             label={label}
-            defaultValue={defaultValue}
+            value={value}
             margin="normal"
             helperText={helperText}
-            onChange={(event) => { if(onChangeEvent) {
-                onChangeEvent(event.target.value)
-            } } }
+            onChange={(event) => onChangeEvent(event) }
             select
         >
             {options.map((item) => <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
