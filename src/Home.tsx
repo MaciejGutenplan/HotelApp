@@ -1,15 +1,13 @@
 import React from 'react';
-import {HotelsTable} from "./hotel/components/HotelsTable";
-import {CitiesTable} from "./city/components/CitiesTable";
-import {CountriesTable} from "./country/components/CountriesTable";
+import { HotelsTable } from "Hotel/components/HotelsTable";
+import { CitiesTable } from "City/components/CitiesTable";
+import { CountriesTable } from "Country/components/CountriesTable";
 
 export const Home = () => {
     return(
         <>
             <HotelsTable />
-            <br />
             <CitiesTable />
-            <br />
             <CountriesTable />
         </>
     )

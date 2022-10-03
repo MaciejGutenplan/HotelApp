@@ -6,6 +6,7 @@ module.exports = {
     path: path.join(__dirname, "/dist"),
     filename: 'bundle.[contenthash].js'
   },
+  mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/index.html",
@@ -17,6 +18,13 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js', '.tsx'],
+    alias: {
+      Hotel: path.resolve(__dirname, 'src/hotel/'),
+      City: path.resolve(__dirname, 'src/city/'),
+      Country: path.resolve(__dirname, 'src/country/'),
+      Common: path.resolve(__dirname, 'src/common/'),
+      Store: path.resolve(__dirname, 'src/store/'),
+    },
   },
   module: {
     rules: [
