@@ -7,18 +7,17 @@ import { addCountry } from "Store/country/actions";
 import { TextField } from "Common/inputs/TextField";
 import { HOME_PAGE } from "../../constants/routes";
 import { Form } from "Common/Form";
+import { InitialFormState } from "Country/consts";
 
 export const CountriesForm = () => {
 
     const navigate = useNavigate();
 
     const formik = useFormik({
-        initialValues: {
-            name: '',
-        },
+        initialValues: InitialFormState,
         onSubmit: values => {
             store.dispatch(addCountry({
-                id: 0,
+                id: null,
                 name: values.name
             }))
             navigate(HOME_PAGE)

@@ -5,18 +5,7 @@ import { TextFieldProps } from "../types";
 
 export const TextField = (props: TextFieldProps) => {
 
-    const { id, name, label, value, type = "text", required, inputProps, disabled = false } = props
-
-    // Remove after Formik implementation
-    const [changedValue, setChangedValue] = useState(value);
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setChangedValue(event.target.value);
-    };
-
-    // Refresh value in case of controlled component
-    useEffect(() => {
-        setChangedValue(value)
-    }, [value])
+    const { id, name, label, value, type = "text", required, inputProps, disabled = false, onChange } = props
 
     return(
         <MUITextField
@@ -26,10 +15,10 @@ export const TextField = (props: TextFieldProps) => {
             name={name}
             label={label}
             inputProps={inputProps}
-            value={changedValue}
+            value={value}
             type={type}
             InputLabelProps={ disabled ? { shrink: true } : { }}
-            onChange={handleChange}
+            onChange={onChange}
             margin="normal"
         />
     )

@@ -9,6 +9,7 @@ import { HOME_PAGE } from "../../constants/routes";
 import { Form } from "Common/Form";
 import { TextField } from "Common/inputs/TextField";
 import { Select } from "Common/inputs/Select";
+import { InitialFormState } from "City/consts";
 
 export const CitiesForm = () => {
 
@@ -16,15 +17,12 @@ export const CitiesForm = () => {
     const countries = useSelector((state: RootState) => state.countries)
 
     const formik = useFormik({
-        initialValues: {
-            name: '',
-            country: Number('')
-        },
+        initialValues: InitialFormState,
         onSubmit: values => {
             store.dispatch(addCity({
                 id: 0,
                 name: values.name,
-                countryId: values.country
+                countryId: Number(values.country)
             }))
             navigate(HOME_PAGE)
         },

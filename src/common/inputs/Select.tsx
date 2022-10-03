@@ -19,7 +19,7 @@ export const Select = (props: SelectProps) => {
             onChange={(event) => onChangeEvent(event) }
             select
         >
-            {options.map((item) => <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
+            {options.map((item) => <MenuItem key={Number(item.id)} value={Number(item.id)}>{item.name}</MenuItem>)}
         </TextField>
     )
 }

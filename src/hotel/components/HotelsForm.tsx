@@ -11,6 +11,7 @@ import { Select } from "Common/inputs/Select";
 import { citiesWithRelations } from "Store/city/actions";
 import { PopulatedCity } from "City/types";
 import { Country } from "Country/types";
+import {InitialFormState} from "Hotel/consts";
 
 export const HotelsForm = () => {
 
@@ -20,21 +21,14 @@ export const HotelsForm = () => {
     const [relativeCountry, setRelativeCountry] = useState<Country | null>()
 
     const formik = useFormik({
-        initialValues: {
-            id: NaN,
-            name: '',
-            price: NaN,
-            address: '',
-            countryId: relativeCountry?.id,
-            city: NaN
-        },
+        initialValues: InitialFormState(relativeCountry?.id || null),
         onSubmit: values => {
             store.dispatch(addHotel({
                 id: NaN,
                 name: values.name,
                 price: values.price,
                 address: values.address,
-                countryId: relativeCountry?.id,
+                countryId: Number(relativeCountry?.id),
                 cityId: values.city
             }))
             navigate(HOME_PAGE)

@@ -12,6 +12,7 @@ import { Select } from "Common/inputs/Select";
 import { citiesWithRelations } from "Store/city/actions";
 import { PopulatedCity } from "City/types";
 import { Country } from "Country/types";
+import {InitialModalState} from "Hotel/consts";
 
 export const HotelModal = (props: HotelModalProps) => {
 
@@ -22,29 +23,22 @@ export const HotelModal = (props: HotelModalProps) => {
     const [relativeCountry, setRelativeCountry] = useState<Country | null>(record.country)
 
     const formik = useFormik({
-        initialValues: {
-            id: record.id,
-            name: record.name,
-            price: record.price,
-            address: record.address,
-            country: record.country.id,
-            city: record.city.id
-        },
+        initialValues: InitialModalState(record),
         onSubmit: values => {
             store.dispatch(editHotel({
                 id: values.id,
                 name: values.name,
                 price: values.price,
                 address: values.address,
-                countryId: relativeCountry?.id,
+                countryId: Number(relativeCountry?.id),
                 cityId: values.city
             }))
             handleClose()
         },
     });
 
-    const handleCityUpdate = (value) => {
-        const country = cities.find((city: PopulatedCity) => city.id === Number(value))?.country
+    const handleCityUpdate = (value: string) => {
+        const country = cities.find((city: PopulatedCity) => city.id === Number(value))?.country || null
         setRelativeCountry(country)
     }
 

@@ -8,16 +8,14 @@ import { editCountry } from "Store/country/actions";
 import { TextField } from "Common/inputs/TextField";
 import { Form } from "Common/Form";
 import { Modal } from "Common/Modal";
+import {InitialModalState} from "Country/consts";
 
 export const CountryModal = (props: CountryModalProps) => {
 
     const { record, open, handleClose } = props
 
     const formik = useFormik({
-        initialValues: {
-            id: record.id,
-            name: record.name
-        },
+        initialValues: InitialModalState(record),
         onSubmit: values => {
             store.dispatch(editCountry({
                 id: record.id,

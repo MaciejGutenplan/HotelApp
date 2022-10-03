@@ -2,19 +2,19 @@ import { Country } from "Country/types";
 import { City } from "City/types";
 
 export type Hotel = {
-    id: number;
+    id: number | null;
     name: string;
     address: string;
-    price: number;
-    countryId: number;
-    cityId: number;
+    price: number | null;
+    countryId: number | null;
+    cityId: number | null;
 }
 
 export type PopulatedHotel = {
-    id: number;
+    id: number | null;
     name: string;
     address: string;
-    price: number;
+    price: number | null;
     country: Country;
     city: City;
 }

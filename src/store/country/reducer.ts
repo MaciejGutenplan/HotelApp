@@ -8,7 +8,7 @@ type CountryReduxAction = {
 const initialState: Country[] = []
 
 const nextCountryId = (countries: Country[]) => {
-    const maxId = countries.reduce((maxId, country) => Math.max(country.id, maxId), -1)
+    const maxId = countries.reduce((maxId, country) => Math.max(Number(country.id), maxId), -1)
     return maxId + 1
 }
 

@@ -14,7 +14,7 @@ export type TextFieldProps = {
     value: any;
     type?: string;
     inputProps?: {}
-    onChange: (event: ChangeEvent) => void
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export type SelectProps = {
@@ -23,13 +23,13 @@ export type SelectProps = {
     name: string;
     label: string;
     options: SelectOptionType[];
-    value: number;
+    value: number | null;
     helperText: string;
-    onChangeEvent: (event: ChangeEvent) => void
+    onChangeEvent: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
 type SelectOptionType = {
-    id: number;
+    id: number | null;
     name: string;
 }
 
