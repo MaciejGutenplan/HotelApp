@@ -13,11 +13,6 @@ export const TextField = (props: TextFieldProps) => {
         setChangedValue(event.target.value);
     };
 
-    // Refresh value in case of controlled component
-    useEffect(() => {
-        setChangedValue(value)
-    }, [value])
-
     return(
         <MUITextField
             required={required}
