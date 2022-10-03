@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import store from "Store/store";
 import { CountryPayload } from "../types";
 import { addCountry } from "Store/country/actions";
-import { GeneralTextField } from "Common/inputs/GeneralTextField";
-import { HOME_PAGE } from "Common/routes";
-import { GeneralForm } from "Common/GeneralForm";
+import { TextField } from "Common/inputs/TextField";
+import { HOME_PAGE } from "../../constants/routes";
+import { Form } from "Common/Form";
 
 export const CountriesForm = () => {
 
@@ -23,15 +23,15 @@ export const CountriesForm = () => {
     }
 
     return(
-        <GeneralForm handleSubmit={handleSubmit} >
-            <GeneralTextField
+        <Form handleSubmit={handleSubmit} >
+            <TextField
                 required
                 id="country-name"
                 name="name"
                 label="Country name"
                 inputProps={{ maxLength: 30 }}
-                defaultValue=""
+                value=""
             />
-        </GeneralForm>
+        </Form>
     )
 }

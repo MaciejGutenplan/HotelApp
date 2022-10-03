@@ -6,9 +6,9 @@ import { formStyle } from "Common/styles";
 
 type Props = FormProps | CloseFormProps
 
-export const GeneralForm = (props: Props) => {
+export const Form = (props: Props) => {
 
-    const { handleSubmit, withCloseButton, handleClose } = props
+    const { handleSubmit, closeButton } = props
 
     return(
         <form onSubmit={handleSubmit}>
@@ -20,14 +20,10 @@ export const GeneralForm = (props: Props) => {
                 sx={formStyle}
             >
                 { props.children }
-                {
-                    withCloseButton ? (
-                        <div>
-                            <Button color="success" type="submit" >Submit</Button>
-                            <Button color="error" onClick={() => handleClose() } >Cancel</Button>
-                        </div> ) :
-                        <Button type="submit" >Submit</Button>
-                }
+                <div>
+                    <Button color="success" type="submit" >Submit</Button>
+                    { closeButton && (closeButton) }
+                </div>
             </Grid>
         </form>
     )

@@ -1,8 +1,9 @@
 import React from "react";
 import {
     Paper,
-    Table,
+    Table as MUITable,
     TableBody,
+    TableCell,
     TableContainer,
     TableHead,
     TableRow
@@ -11,17 +12,17 @@ import {
 import { TableData } from "./types";
 import { tableContainerStyle, tableStyle } from "Common/styles";
 
-export const GeneralTable = (props: TableData) => {
+export const Table = (props: TableData) => {
 
     const { columns, rows } = props
 
     return (
         <TableContainer component={Paper} sx={tableContainerStyle}>
-            <Table sx={tableStyle} aria-label="table">
+            <MUITable sx={tableStyle} aria-label="table">
                 <TableHead>
                     <TableRow>
                         {
-                            columns.map((columnCell) => columnCell )
+                            columns.map((columnCell) => <TableCell>{columnCell}</TableCell> )
                         }
                     </TableRow>
                 </TableHead>
@@ -31,13 +32,13 @@ export const GeneralTable = (props: TableData) => {
                         rows.map((row, index) => (
                             <TableRow key={"table-row-" + index}>
                                 {
-                                    row.map((rowCell) => rowCell)
+                                    row.map((rowCell) => <TableCell>{rowCell}</TableCell>)
                                 }
                             </TableRow>
                         ))
                     }
                 </TableBody>
-            </Table>
+            </MUITable>
         </TableContainer>
     )
 }

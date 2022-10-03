@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
+import { Button } from "@mui/material";
 
 import { HotelPayload, HotelModalProps } from "../types";
 import store from "Store/store";
 import { editHotel } from "Store/hotel/actions";
-import { GeneralForm } from "Common/GeneralForm";
-import { GeneralModal } from "Common/GeneralModal";
-import { GeneralTextField } from "Common/inputs/GeneralTextField";
-import { GeneralSelect } from "Common/inputs/GeneralSelect";
-import { GeneralNumberField } from "Common/inputs/GeneralNumberField";
-import { GeneralDisabledField } from "Common/inputs/GeneralDisabledField";
+import { Form } from "Common/Form";
+import { Modal } from "Common/Modal";
+import { TextField } from "Common/inputs/TextField";
+import { Select } from "Common/inputs/Select";
 import {citiesWithRelations} from "Store/city/actions";
-import {PopulatedCity} from "City/types";
-import {Country} from "Country/types";
+import { PopulatedCity } from "City/types";
+import { Country } from "Country/types";
 
 export const HotelModal = (props: HotelModalProps) => {
 
@@ -19,12 +18,11 @@ export const HotelModal = (props: HotelModalProps) => {
 
     const cities = citiesWithRelations()
 
-    const [relativeCountry, setRelativeCountry] = useState<Country>(record.country)
+    const [relativeCountry, setRelativeCountry] = useState<Country | undefined>(record.country)
     const handleCityUpdate = (cityId: number) => {
-        const country = cities.find((city: PopulatedCity) => city.id === cityId)?.country || {} as Country
+        const country = cities.find((city: PopulatedCity) => city.id === cityId)?.country
         setRelativeCountry(country)
     }
-
 
     const handleEdit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -34,17 +32,19 @@ export const HotelModal = (props: HotelModalProps) => {
             name: target.name.value,
             price: Number(target.price.value),
             address: target.address.value,
-            countryId: relativeCountry?.id,
+            countryId: Number(relativeCountry?.id),
             cityId: target.city.value
         }))
         handleClose()
     }
 
+    const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
+
     return(
-        <GeneralModal open={open} handleClose={handleClose} >
-            <GeneralForm handleSubmit={handleEdit} withCloseButton handleClose={handleClose}>
-                <GeneralTextField required id="hotel-name" name="name" label="Hotel name" defaultValue={record.name} inputProps={{ maxLength: 30 }} />
-                <GeneralSelect
+        <Modal open={open} handleClose={handleClose} >
+            <Form handleSubmit={handleEdit} closeButton={closeButton}>
+                <TextField required id="hotel-name" name="name" label="Hotel name" value={record.name} inputProps={{ maxLength: 30 }} />
+                <Select
                     required
                     id="hotel-city"
                     name="city"
@@ -53,10 +53,10 @@ export const HotelModal = (props: HotelModalProps) => {
                     options={ cities }
                     helperText="Please select city"
                     onChangeEvent={ handleCityUpdate }/>
-                <GeneralDisabledField id="hotel-country" name="country" label="Country" inputProps={{ shrink: true }} value={ relativeCountry?.name } />
-                <GeneralTextField required id="hotel-address" name="address" label="Hotel address" defaultValue={ record.address } inputProps={{ maxLength: 60 }} />
-                <GeneralNumberField required id="hotel-price" name="price" label="Price" defaultValue={ record.price } inputProps={{ min: 0 }} />
-            </GeneralForm>
-        </GeneralModal>
+                <TextField disabled id="hotel-country" name="country" label="Country" inputProps={{ shrink: true }} value={ relativeCountry ? relativeCountry.name : "City has not been selected" } />
+                <TextField required id="hotel-address" name="address" label="Hotel address" value={ record.address } inputProps={{ maxLength: 60 }} />
+                <TextField required id="hotel-price" name="price" label="Price" type="number" value={ record.price } inputProps={{ min: 0 }} />
+            </Form>
+        </Modal>
     )
 }

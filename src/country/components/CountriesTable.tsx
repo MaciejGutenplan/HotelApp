@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { IconButton, TableCell } from "@mui/material";
+import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { GeneralTable } from "Common/GeneralTable";
+import { Table } from "Common/Table";
 import { RootState } from "Store/store";
 import { CountryModal } from "./CountryModal";
+import { editCellStyle } from "Common/styles";
 
 export const CountriesTable = () => {
     const countries = useSelector((state: RootState) => state.countries)
@@ -21,22 +22,22 @@ export const CountriesTable = () => {
     const handleClose = () => setOpen(false);
 
     const columns = [
-        <TableCell key="Name">Name</TableCell>,
-        <TableCell key="Edit" align="right">Edit</TableCell>,
+        <span key="Name">Name</span>,
+        <span key="Edit" style={editCellStyle}>Edit</span>,
     ]
 
     const rows = countries.map((country) => [
-        <TableCell key={country.name}>{country.name}</TableCell>,
-        <TableCell key="edit-icon" align="right">
+        <span key={country.name}>{country.name}</span>,
+        <span key="edit-icon" style={editCellStyle}>
             <IconButton onClick={() => handleOpen(country)}>
                 <EditIcon />
             </IconButton>
-        </TableCell>]
+        </span>]
     )
 
     return (
         <>
-            <GeneralTable columns={columns} rows={rows} />
+            <Table columns={columns} rows={rows} />
             { selectedRecord && <CountryModal record={selectedRecord} open={open} handleClose={handleClose}/> }
         </>
     )

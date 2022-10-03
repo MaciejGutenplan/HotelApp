@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { IconButton, TableCell } from "@mui/material";
+import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { GeneralTable } from "Common/GeneralTable";
+import { Table } from "Common/Table";
 import { CityModal } from "./CityModal";
 import { citiesWithRelations } from "Store/city/actions";
+import {editCellStyle} from "Common/styles";
 
 export const CitiesTable = () => {
     const cities = citiesWithRelations()
@@ -20,24 +21,24 @@ export const CitiesTable = () => {
     const handleClose = () => setOpen(false);
 
     const columns = [
-        <TableCell key="Name">Name</TableCell>,
-        <TableCell key="Country">Country</TableCell>,
-        <TableCell key="Edit" align="right">Edit</TableCell>,
+        <span key="Name">Name</span>,
+        <span key="Country">Country</span>,
+        <span key="Edit" style={editCellStyle}>Edit</span>,
     ]
 
     const rows = cities.map((city) => [
-        <TableCell key={city.name}>{city.name}</TableCell>,
-        <TableCell key={city.country.name}>{city.country.name}</TableCell>,
-        <TableCell key="edit-icon" align="right">
+        <span key={city.name}>{city.name}</span>,
+        <span key={city.country.name}>{city.country.name}</span>,
+        <span key="edit-icon" style={editCellStyle}>
             <IconButton onClick={() => handleOpen(city)}>
                 <EditIcon />
             </IconButton>
-        </TableCell>]
+        </span>]
     )
 
     return (
         <>
-            <GeneralTable columns={columns} rows={rows} />
+            <Table columns={columns} rows={rows} />
             { selectedRecord && <CityModal record={selectedRecord} open={open} handleClose={handleClose}/> }
         </>
     )

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { IconButton, TableCell } from "@mui/material";
+import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { GeneralTable } from "Common/GeneralTable";
+import { Table } from "Common/Table";
 import { HotelModal } from "./HotelModal";
 import { hotelsWithRelations } from "Store/hotel/actions";
+import { editCellStyle } from "Common/styles";
 
 export const HotelsTable = () => {
     const hotels = hotelsWithRelations();
@@ -19,30 +20,30 @@ export const HotelsTable = () => {
     const handleClose = () => setOpen(false);
 
     const columns = [
-        <TableCell key="Name">Name</TableCell>,
-        <TableCell key="Price">Price</TableCell>,
-        <TableCell key="Address">Address</TableCell>,
-        <TableCell key="City">City</TableCell>,
-        <TableCell key="Country">Country</TableCell>,
-        <TableCell key="Edit" align="right">Edit</TableCell>,
+        <span key="Name">Name</span>,
+        <span key="Price">Price</span>,
+        <span key="Address">Address</span>,
+        <span key="City">City</span>,
+        <span key="Country">Country</span>,
+        <span key="Edit" style={editCellStyle}>Edit</span>,
         ]
 
     const rows = hotels.map((hotel) => [
-        <TableCell key={hotel.name}>{hotel.name}</TableCell>,
-        <TableCell key={hotel.price}>{hotel.price}</TableCell>,
-        <TableCell key={hotel.address}>{hotel.address}</TableCell>,
-        <TableCell key={hotel.city.name}>{hotel.city.name}</TableCell>,
-        <TableCell key={hotel.country.name}>{hotel.country.name}</TableCell>,
-        <TableCell key="edit-icon" align="right">
+        <span key={hotel.name}>{hotel.name}</span>,
+        <span key={hotel.price}>{hotel.price}</span>,
+        <span key={hotel.address}>{hotel.address}</span>,
+        <span key={hotel.city.name}>{hotel.city.name}</span>,
+        <span key={hotel.country.name}>{hotel.country.name}</span>,
+        <span key="edit-icon" style={editCellStyle}>
             <IconButton onClick={() => handleOpen(hotel)}>
                 <EditIcon />
             </IconButton>
-        </TableCell>]
+        </span>]
     )
 
     return (
         <>
-            <GeneralTable columns={columns} rows={rows} />
+            <Table columns={columns} rows={rows} />
             { selectedRecord && <HotelModal record={selectedRecord} open={open} handleClose={handleClose} /> }
         </>
     )

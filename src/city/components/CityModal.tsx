@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
 
 import { CityModalProps, CityPayload } from "../types";
 import store, { RootState } from "Store/store";
 import { editCity } from "Store/city/actions";
-import { GeneralModal } from "Common/GeneralModal";
-import { GeneralTextField } from "Common/inputs/GeneralTextField";
-import { GeneralSelect } from "Common/inputs/GeneralSelect";
-import { GeneralForm } from "Common/GeneralForm";
+import { Modal } from "Common/Modal";
+import { TextField } from "Common/inputs/TextField";
+import { Select } from "Common/inputs/Select";
+import { Form } from "Common/Form";
 
 export const CityModal = (props: CityModalProps) => {
 
@@ -25,12 +26,14 @@ export const CityModal = (props: CityModalProps) => {
         handleClose()
     }
 
+    const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
+
     return(
-        <GeneralModal open={open} handleClose={handleClose} >
-            <GeneralForm handleSubmit={handleEdit} withCloseButton handleClose={handleClose}>
-                <GeneralTextField required id="city-name" name="name" label="City name" defaultValue={record.name} inputProps={{ maxLength: 30 }} />
-                <GeneralSelect required id="city-country" name="country" label="Country" defaultValue={record.country.id} options={countries} helperText="Please select country"/>
-            </GeneralForm>
-        </GeneralModal>
+        <Modal open={open} handleClose={handleClose} >
+            <Form handleSubmit={handleEdit} closeButton={closeButton}>
+                <TextField required id="city-name" name="name" label="City name" value={record.name} inputProps={{ maxLength: 30 }} />
+                <Select required id="city-country" name="country" label="Country" defaultValue={record.country.id} options={countries} helperText="Please select country"/>
+            </Form>
+        </Modal>
     )
 }

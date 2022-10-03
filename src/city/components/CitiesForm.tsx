@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import store, { RootState } from "Store/store";
 import { CityPayload } from "../types";
 import { addCity } from "Store/city/actions";
-import { HOME_PAGE } from "Common/routes";
-import { GeneralForm } from "Common/GeneralForm";
-import { GeneralTextField } from "Common/inputs/GeneralTextField";
-import { GeneralSelect } from "Common/inputs/GeneralSelect";
+import { HOME_PAGE } from "../../constants/routes";
+import { Form } from "Common/Form";
+import { TextField } from "Common/inputs/TextField";
+import { Select } from "Common/inputs/Select";
 
 export const CitiesForm = () => {
 
@@ -28,9 +28,9 @@ export const CitiesForm = () => {
     }
 
     return(
-        <GeneralForm handleSubmit={handleSubmit}>
-            <GeneralTextField required id="city-name" name="name" label="City name" defaultValue="" inputProps={{ maxLength: 30 }} />
-            <GeneralSelect required id="city-country" name="country" label="Country" defaultValue="" options={countries} helperText="Please select country"/>
-        </GeneralForm>
+        <Form handleSubmit={handleSubmit}>
+            <TextField required id="city-name" name="name" label="City name" value="" inputProps={{ maxLength: 30 }} />
+            <Select required id="city-country" name="country" label="Country" defaultValue="" options={countries} helperText="Please select country"/>
+        </Form>
     )
 }

@@ -6,13 +6,14 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import { HotelsForm as AddHotel } from "./hotel/components/HotelsForm";
-import { CountriesForm as AddCountry } from "./country/components/CountriesForm";
-import { CitiesForm as AddCity } from "./city/components/CitiesForm";
+import { HotelsForm as AddHotelForm } from "./hotel/components/HotelsForm";
+import { CountriesForm as AddCountryForm } from "./country/components/CountriesForm";
+import { CitiesForm as AddCityForm } from "./city/components/CitiesForm";
 
 import { Home } from "./Home";
 import { Navigation } from "./Navigation";
 import store from "./store/store";
+import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "./constants/routes";
 
 const App = () => {
   return (
@@ -22,10 +23,10 @@ const App = () => {
           <Navigation />
 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/add-hotel" element={<AddHotel />} />
-            <Route path="/add-city" element={<AddCity />} />
-            <Route path="/add-country" element={<AddCountry />} />
+            <Route path={HOME_PAGE} element={<Home />} />
+            <Route path={ADD_HOTEL_FORM} element={<AddHotelForm />} />
+            <Route path={ADD_CITY_FORM} element={<AddCityForm />} />
+            <Route path={ADD_COUNTRY_FORM} element={<AddCountryForm />} />
             <Route path="*" element={<>NOT FOUND</>}/>
           </Routes>
         </Router>

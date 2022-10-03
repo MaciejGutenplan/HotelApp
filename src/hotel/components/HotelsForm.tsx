@@ -4,12 +4,10 @@ import { useNavigate } from "react-router-dom";
 import store from "Store/store";
 import { HotelPayload } from "../types";
 import { addHotel } from "Store/hotel/actions";
-import { HOME_PAGE } from "Common/routes";
-import { GeneralForm } from "Common/GeneralForm";
-import { GeneralTextField } from "Common/inputs/GeneralTextField";
-import { GeneralSelect } from "Common/inputs/GeneralSelect";
-import { GeneralDisabledField } from "Common/inputs/GeneralDisabledField";
-import { GeneralNumberField } from "Common/inputs/GeneralNumberField";
+import { HOME_PAGE } from "../../constants/routes";
+import { Form } from "Common/Form";
+import { TextField } from "Common/inputs/TextField";
+import { Select } from "Common/inputs/Select";
 import { citiesWithRelations } from "Store/city/actions";
 import { PopulatedCity } from "City/types";
 import { Country } from "Country/types";
@@ -19,9 +17,9 @@ export const HotelsForm = () => {
     const navigate = useNavigate();
     const cities = citiesWithRelations()
 
-    const [relativeCountry, setRelativeCountry] = useState<Country>({} as Country)
+    const [relativeCountry, setRelativeCountry] = useState<Country | null>()
     const handleCityUpdate = (cityId: number) => {
-        const country = cities.find((city: PopulatedCity) => city.id === cityId)?.country || {} as Country
+        const country = cities.find((city: PopulatedCity) => city.id === cityId)?.country
         setRelativeCountry(country)
     }
 
@@ -33,16 +31,16 @@ export const HotelsForm = () => {
             name: target.name.value,
             price: Number(target.price.value),
             address: target.address.value,
-            countryId: relativeCountry?.id,
+            countryId: Number(relativeCountry?.id),
             cityId: target.city.value
         }))
         navigate(HOME_PAGE)
     }
 
     return(
-        <GeneralForm handleSubmit={handleSubmit} >
-            <GeneralTextField required id="hotel-name" name="name" label="Hotel name" defaultValue="" inputProps={{ maxLength: 30 }} />
-            <GeneralSelect
+        <Form handleSubmit={handleSubmit} >
+            <TextField required id="hotel-name" name="name" label="Hotel name" value="" inputProps={{ maxLength: 30 }} />
+            <Select
                 required
                 id="hotel-city"
                 name="city"
@@ -51,9 +49,9 @@ export const HotelsForm = () => {
                 options={ cities }
                 helperText="Please select city"
                 onChangeEvent={ handleCityUpdate }/>
-            <GeneralDisabledField id="hotel-country" name="country" label="Country" value={ relativeCountry?.name } />
-            <GeneralTextField required id="hotel-address" name="address" label="Hotel address" defaultValue="" inputProps={{ maxLength: 60 }} />
-            <GeneralNumberField required id="hotel-price" name="price" label="Price" defaultValue="" inputProps={{ min: 0 }} />
-        </GeneralForm>
+            <TextField disabled id="hotel-country" name="country" label="Country" value={ relativeCountry ? relativeCountry.name : "City has not been selected" } />
+            <TextField required id="hotel-address" name="address" label="Hotel address" value="" inputProps={{ maxLength: 60 }} />
+            <TextField required id="hotel-price" name="price" label="Price" value="" type="number" inputProps={{ min: 0 }} />
+        </Form>
     )
 }

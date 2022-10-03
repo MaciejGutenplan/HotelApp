@@ -1,11 +1,12 @@
 import React from 'react';
+import { Button } from "@mui/material";
 
 import { CountryModalProps, CountryPayload } from "../types";
 import store from "Store/store";
 import { editCountry } from "Store/country/actions";
-import { GeneralTextField } from "Common/inputs/GeneralTextField";
-import { GeneralForm } from "Common/GeneralForm";
-import { GeneralModal } from "Common/GeneralModal";
+import { TextField } from "Common/inputs/TextField";
+import { Form } from "Common/Form";
+import { Modal } from "Common/Modal";
 
 export const CountryModal = (props: CountryModalProps) => {
 
@@ -23,19 +24,20 @@ export const CountryModal = (props: CountryModalProps) => {
         handleClose()
     }
 
+    const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
 
     return(
-        <GeneralModal open={open} handleClose={handleClose}>
-            <GeneralForm handleSubmit={handleEdit} withCloseButton handleClose={handleClose} >
-                <GeneralTextField
+        <Modal open={open} handleClose={handleClose}>
+            <Form handleSubmit={handleEdit} closeButton={closeButton} >
+                <TextField
                     required
                     id="country-name"
                     name="name"
                     label="Country name"
                     inputProps={{ maxLength: 30 }}
-                    defaultValue={ record.name }
+                    value={ record.name }
                 />
-            </GeneralForm>
-        </GeneralModal>
+            </Form>
+        </Modal>
     )
 }

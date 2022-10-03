@@ -6,30 +6,14 @@ export type TableData = {
 }
 
 export type TextFieldProps = {
-    required: boolean;
+    disabled?: boolean;
+    required?: boolean;
     id: string;
     name: string;
     label: string;
-    defaultValue: string | number;
-    inputProps: {}
-}
-
-export type DisabledFieldProps = {
-    id: string;
-    name: string;
-    label: string;
-    value: string | number;
+    value: any;
+    type?: string;
     inputProps?: {}
-}
-
-
-export type NumberFieldProps = {
-    required: boolean;
-    id: string;
-    name: string;
-    label: string;
-    defaultValue: string | number;
-    inputProps: {}
 }
 
 export type SelectProps = {
@@ -38,9 +22,14 @@ export type SelectProps = {
     name: string;
     label: string;
     defaultValue: number | string;
-    options: { id: number, name: string }[];
+    options: SelectOptionType[];
     helperText: string;
     onChangeEvent?: (value: any) => void
+}
+
+type SelectOptionType = {
+    id: number;
+    name: string;
 }
 
 export type ModalProps = {
@@ -52,13 +41,11 @@ export type ModalProps = {
 export type FormProps = {
     handleSubmit: (event: React.FormEvent) => void;
     children: React.ReactNode;
-    withCloseButton?: never;
-    handleClose?: never;
+    closeButton?: never;
 }
 
 export type CloseFormProps = {
     handleSubmit: (event: React.FormEvent) => void;
     children: React.ReactNode;
-    withCloseButton: boolean;
-    handleClose: () => void;
+    closeButton: React.ReactNode;
 }

@@ -3,7 +3,7 @@ import { MenuItem, TextField } from "@mui/material";
 
 import { SelectProps } from "../types";
 
-export const GeneralSelect = (props: SelectProps) => {
+export const Select = (props: SelectProps) => {
 
     const { id, name, label, defaultValue, options, required, helperText, onChangeEvent } = props
 
