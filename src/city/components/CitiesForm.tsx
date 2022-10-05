@@ -20,7 +20,7 @@ export const CitiesForm = () => {
         initialValues: InitialFormState,
         onSubmit: values => {
             store.dispatch(addCity({
-                id: 0,
+                id: null,
                 name: values.name,
                 countryId: Number(values.country)
             }))

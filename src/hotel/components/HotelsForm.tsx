@@ -24,7 +24,7 @@ export const HotelsForm = () => {
         initialValues: InitialFormState(relativeCountry?.id || null),
         onSubmit: values => {
             store.dispatch(addHotel({
-                id: NaN,
+                id: null,
                 name: values.name,
                 price: values.price,
                 address: values.address,
