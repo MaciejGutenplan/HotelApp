@@ -9,7 +9,7 @@ export const InitialFormState = (countryId: number | null) => ({
     city: null
 })
 
-export const InitialModalState = (hotel: PopulatedHotel) => ({
+export const createInitialModalState = (hotel: PopulatedHotel) => ({
     id: hotel.id,
     name: hotel.name,
     price: hotel.price,

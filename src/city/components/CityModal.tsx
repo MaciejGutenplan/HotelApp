@@ -10,7 +10,7 @@ import { Modal } from "Common/Modal";
 import { TextField } from "Common/inputs/TextField";
 import { Select } from "Common/inputs/Select";
 import { Form } from "Common/Form";
-import {InitialModalState} from "City/consts";
+import { createInitialModalState } from "City/consts";
 
 export const CityModal = (props: CityModalProps) => {
 
@@ -18,7 +18,7 @@ export const CityModal = (props: CityModalProps) => {
     const countries = useSelector((state: RootState) => state.countries)
 
     const formik = useFormik({
-        initialValues: InitialModalState(record),
+        initialValues: createInitialModalState(record),
         onSubmit: values => {
             store.dispatch(editCity({
                 id: record.id,

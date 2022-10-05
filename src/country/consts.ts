@@ -5,7 +5,7 @@ export const InitialFormState = {
     name: ''
 }
 
-export const InitialModalState = (country: Country) => ({
+export const createInitialModalState = (country: Country) => ({
     id: country.id,
     name: country.name
 })

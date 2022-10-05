@@ -6,7 +6,7 @@ export const InitialFormState = {
     country: null
 }
 
-export const InitialModalState = (city: PopulatedCity) => ({
+export const createInitialModalState = (city: PopulatedCity) => ({
     id: city.id,
     name: city.name,
     country: city.country.id
