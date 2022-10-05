@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 
 export type TableData = {
     columns: React.ReactNode[];
@@ -14,6 +14,7 @@ export type TextFieldProps = {
     value: any;
     type?: string;
     inputProps?: {}
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export type SelectProps = {
@@ -21,14 +22,14 @@ export type SelectProps = {
     id: string;
     name: string;
     label: string;
-    defaultValue: number | string;
     options: SelectOptionType[];
+    value: number | null;
     helperText: string;
-    onChangeEvent?: (value: any) => void
+    onChangeEvent: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
 type SelectOptionType = {
-    id: number;
+    id: number | null;
     name: string;
 }
 
@@ -39,13 +40,13 @@ export type ModalProps = {
 }
 
 export type FormProps = {
-    handleSubmit: (event: React.FormEvent) => void;
+    handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
     children: React.ReactNode;
     closeButton?: never;
 }
 
 export type CloseFormProps = {
-    handleSubmit: (event: React.FormEvent) => void;
+    handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
     children: React.ReactNode;
     closeButton: React.ReactNode;
 }

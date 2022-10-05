@@ -1,10 +1,6 @@
 export type Country = {
-    id: number;
+    id: number | null;
     name: string;
-}
-
-export type CountryPayload = {
-    name: { value: string }
 }
 
 export type CountryModalProps = {

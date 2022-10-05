@@ -8,7 +8,7 @@ type HotelReduxAction = {
 const initialState: Hotel[] = []
 
 const nextHotelId = (hotels: Hotel[]) => {
-    const maxId = hotels.reduce((maxId, hotel) => Math.max(hotel.id, maxId), -1)
+    const maxId = hotels.reduce((maxId, hotel) => Math.max(Number(hotel.id), maxId), -1)
     return maxId + 1
 }
 

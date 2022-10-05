@@ -8,7 +8,7 @@ type CityReduxAction = {
 const initialState: City[] = []
 
 const nextCityId = (cities: City[]) => {
-    const maxId = cities.reduce((maxId, city) => Math.max(city.id, maxId), -1)
+    const maxId = cities.reduce((maxId, city) => Math.max(Number(city.id), maxId), -1)
     return maxId + 1
 }
 

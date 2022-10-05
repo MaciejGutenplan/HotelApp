@@ -1,20 +1,15 @@
 import { Country } from "Country/types";
 
 export type City = {
-    id: number;
+    id: number | null;
     name: string;
     countryId: number;
 }
 
 export type PopulatedCity = {
-    id: number;
+    id: number | null;
     name: string;
     country: Country;
-}
-
-export type CityPayload = {
-    name: { value: string }
-    country: { value: number }
 }
 
 export type CityModalProps = {
