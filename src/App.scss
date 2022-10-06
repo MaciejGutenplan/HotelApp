@@ -6,7 +6,7 @@
   flex-grow: 1;
 }
 
-.not-found-container {
+.error-boundary-container, .not-found-container {
   display: flex;
   flex-direction: column;
   align-items: center;

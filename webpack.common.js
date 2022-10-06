@@ -17,7 +17,7 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx'],
+    extensions: ['.ts', '.js', '.tsx', 'png'],
     alias: {
       Hotel: path.resolve(__dirname, 'src/hotel/'),
       City: path.resolve(__dirname, 'src/city/'),
@@ -31,7 +31,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
