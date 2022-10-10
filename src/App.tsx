@@ -12,6 +12,7 @@ import { CitiesForm as AddCityForm } from "./city/components/CitiesForm";
 
 import { Home } from "./Home";
 import { Navigation } from "./Navigation";
+import { NotFound } from "./NotFound";
 import store from "./store/store";
 import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "./constants/routes";
 
@@ -27,7 +28,7 @@ const App = () => {
             <Route path={ADD_HOTEL_FORM} element={<AddHotelForm />} />
             <Route path={ADD_CITY_FORM} element={<AddCityForm />} />
             <Route path={ADD_COUNTRY_FORM} element={<AddCountryForm />} />
-            <Route path="*" element={<>NOT FOUND</>}/>
+            <Route path="*" element={<NotFound />}/>
           </Routes>
         </Router>
       </Provider>
