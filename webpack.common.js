@@ -17,7 +17,7 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx', 'png'],
+    extensions: ['.ts', '.js', '.tsx'],
     alias: {
       Hotel: path.resolve(__dirname, 'src/hotel/'),
       City: path.resolve(__dirname, 'src/city/'),
