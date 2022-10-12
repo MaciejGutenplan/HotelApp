@@ -5,6 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ErrorBoundary } from 'react-error-boundary'
 
 import { HotelsForm as AddHotelForm } from "./hotel/components/HotelsForm";
 import { CountriesForm as AddCountryForm } from "./country/components/CountriesForm";
@@ -15,11 +16,13 @@ import { Navigation } from "./Navigation";
 import { NotFound } from "./NotFound";
 import store from "./store/store";
 import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "./constants/routes";
+import { ErrorBoundary as ErrorFallback } from "./ErrorBoundary";
 
 const App = () => {
   return (
-      <Provider store={store}>
-        <Router>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Provider store={store}>
+          <Router>
 
           <Navigation />
 
@@ -32,6 +35,7 @@ const App = () => {
           </Routes>
         </Router>
       </Provider>
+    </ErrorBoundary>
   )
 };
 
