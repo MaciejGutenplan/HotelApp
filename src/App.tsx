@@ -17,6 +17,7 @@ import { NotFound } from "./NotFound";
 import store from "./store/store";
 import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "./constants/routes";
 import { ErrorBoundary as ErrorFallback } from "./ErrorBoundary";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   return (
@@ -27,10 +28,10 @@ const App = () => {
           <Navigation />
 
           <Routes>
-            <Route path={HOME_PAGE} element={<Home />} />
-            <Route path={ADD_HOTEL_FORM} element={<AddHotelForm />} />
-            <Route path={ADD_CITY_FORM} element={<AddCityForm />} />
-            <Route path={ADD_COUNTRY_FORM} element={<AddCountryForm />} />
+            <Route path={HOME_PAGE} element={ <ProtectedRoute isAllowed={true}> <Home /> </ProtectedRoute>} />
+            <Route path={ADD_HOTEL_FORM} element={ <ProtectedRoute isAllowed={true}> <AddHotelForm /> </ProtectedRoute>} />
+            <Route path={ADD_CITY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCityForm /> </ProtectedRoute>} />
+            <Route path={ADD_COUNTRY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCountryForm /> </ProtectedRoute>} />
             <Route path="*" element={<NotFound />}/>
           </Routes>
         </Router>
