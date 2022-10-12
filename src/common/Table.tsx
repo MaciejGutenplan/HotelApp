@@ -14,12 +14,12 @@ import { tableContainerStyle, tableStyle } from "Common/styles";
 
 export const Table = (props: TableData) => {
 
-    const { columns, rows } = props
+    const { columns, rows, titleBarColor="white" } = props
 
     return (
-        <TableContainer component={Paper} sx={tableContainerStyle}>
+        <TableContainer component={Paper} sx={tableContainerStyle }>
             <MUITable sx={tableStyle} aria-label="table">
-                <TableHead>
+                <TableHead sx={{ background: titleBarColor }}>
                     <TableRow>
                         {
                             columns.map((columnCell) => <TableCell>{columnCell}</TableCell> )

@@ -1,3 +1,5 @@
+import React, { SetStateAction } from "react";
+
 import { Country } from "Country/types";
 import { City } from "City/types";
 
@@ -19,16 +21,17 @@ export type PopulatedHotel = {
     city: City;
 }
 
-export type HotelPayload = {
-    name: { value: string },
-    address: { value: string },
-    price: { value: number },
-    country: { value: string },
-    city: { value: number }
-}
-
 export type HotelModalProps = {
     record: PopulatedHotel;
     open: boolean;
     handleClose: () => any;
+}
+
+export type HotelTableProps = {
+    setDetailsPanel: React.Dispatch<SetStateAction<React.ReactNode>>;
+}
+
+export type DetailsPanelProps = {
+    hotel: PopulatedHotel;
+    setDetailsPanel: React.Dispatch<SetStateAction<React.ReactNode | null>>
 }

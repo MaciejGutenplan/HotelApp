@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import store from "Store/store";
 import { addCountry } from "Store/country/actions";
 import { TextField } from "Common/inputs/TextField";
-import { HOME_PAGE } from "../../constants/routes";
+import { HOME_PAGE } from "Constants/routes";
 import { Form } from "Common/Form";
 import { InitialFormState } from "Country/consts";
 
