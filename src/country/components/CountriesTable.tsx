@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { useTranslation } from "react-i18next";
 
 import { Table } from "Common/Table";
 import { RootState } from "Store/store";
@@ -10,6 +11,7 @@ import { editCellStyle } from "Common/styles";
 
 export const CountriesTable = () => {
     const countries = useSelector((state: RootState) => state.countries)
+    const { t } = useTranslation();
 
     const [selectedRecord, setSelectedRecord] = useState<any>();
     const [open, setOpen] = useState(false);
@@ -22,8 +24,8 @@ export const CountriesTable = () => {
     const handleClose = () => setOpen(false);
 
     const columns = [
-        <span key="Name">Name</span>,
-        <span key="Edit" style={editCellStyle}>Edit</span>,
+        <span key="Name">{t("name")}</span>,
+        <span key="Edit" style={editCellStyle}>{t("edit")}</span>,
     ]
 
     const rows = countries.map((country) => [

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import { CountryModalProps } from "../types";
 import store from "Store/store";
@@ -13,6 +14,7 @@ import { createInitialModalState } from "Country/consts";
 export const CountryModal = (props: CountryModalProps) => {
 
     const { record, open, handleClose } = props
+    const { t } = useTranslation();
 
     const formik = useFormik({
         initialValues: createInitialModalState(record),
@@ -25,7 +27,7 @@ export const CountryModal = (props: CountryModalProps) => {
         },
     });
 
-    const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
+    const closeButton = <Button color="error" onClick={() => handleClose() } >{t("button.cancel")}</Button>
 
     return(
         <Modal open={open} handleClose={handleClose}>
@@ -34,7 +36,7 @@ export const CountryModal = (props: CountryModalProps) => {
                     required
                     id="country-name"
                     name="name"
-                    label="Country name"
+                    label={t("form.hotel")}
                     inputProps={{ maxLength: 30 }}
                     value={ formik.values.name }
                     onChange={formik.handleChange}

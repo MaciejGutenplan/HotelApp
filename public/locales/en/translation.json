@@ -1,0 +1,29 @@
+{
+  "name": "Name",
+  "price": "Price",
+  "address": "Address",
+  "city": "City",
+  "country": "Country",
+  "edit": "Edit",
+  "actions": "Actions",
+  "navigation": {
+    "hotel": "HOTEL",
+    "city": "CITY",
+    "country": "COUNTRY",
+    "language": "Language"
+  },
+  "form": {
+    "hotel": "Hotel name",
+    "city": "Hotel city",
+    "citySelectHelp": "Please choose city",
+    "citySelectError": "City has not been selected",
+    "country": "Country name",
+    "countrySelectHelp": "Please select country",
+    "hotelAddress": "Hotel address",
+    "price": "Price"
+  },
+  "button": {
+    "submit": "Submit",
+    "cancel": "Cancel"
+  }
+}

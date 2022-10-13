@@ -18,17 +18,19 @@ export type TextFieldProps = {
 }
 
 export type SelectProps = {
-    required: boolean;
+    required?: boolean;
     id: string;
     name: string;
     label: string;
     options: SelectOptionType[];
     value: number | null;
-    helperText: string;
+    helperText?: string;
+    variant?: "outlined" | "standard" | "filled" | undefined;
     onChangeEvent: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+    sx?: {}
 }
 
-type SelectOptionType = {
+export type SelectOptionType = {
     id: number | null;
     name: string;
 }

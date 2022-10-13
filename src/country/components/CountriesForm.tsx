@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import store from "Store/store";
 import { addCountry } from "Store/country/actions";
@@ -12,6 +13,7 @@ import { InitialFormState } from "Country/consts";
 export const CountriesForm = () => {
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const formik = useFormik({
         initialValues: InitialFormState,
@@ -30,7 +32,7 @@ export const CountriesForm = () => {
                 required
                 id="name"
                 name="name"
-                label="Country name"
+                label={t("form.hotel")}
                 inputProps={{ maxLength: 30 }}
                 onChange={formik.handleChange}
                 value={formik.values.name}

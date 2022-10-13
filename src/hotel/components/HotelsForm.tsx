@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import store from "Store/store";
 import { addHotel } from "Store/hotel/actions";
@@ -11,12 +12,13 @@ import { Select } from "Common/inputs/Select";
 import { citiesWithRelations } from "Store/city/actions";
 import { PopulatedCity } from "City/types";
 import { Country } from "Country/types";
-import {InitialFormState} from "Hotel/consts";
+import { InitialFormState } from "Hotel/consts";
 
 export const HotelsForm = () => {
 
     const navigate = useNavigate();
     const cities = citiesWithRelations()
+    const { t } = useTranslation();
 
     const [relativeCountry, setRelativeCountry] = useState<Country | null>()
 
@@ -46,7 +48,7 @@ export const HotelsForm = () => {
                 required
                 id="hotel-name"
                 name="name"
-                label="Hotel name"
+                label={t("form.hotel")}
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 inputProps={{ maxLength: 30 }} />
@@ -54,10 +56,10 @@ export const HotelsForm = () => {
                 required
                 id="hotel-city"
                 name="city"
-                label="City"
+                label={t("form.city")}
                 value={formik.values.city}
                 options={ cities }
-                helperText="Please select city"
+                helperText={t("form.citySelectHelp")}
                 onChangeEvent={ (e) =>{
                     formik.handleChange(e)
                     handleCityUpdate(e.target.value)
@@ -66,13 +68,13 @@ export const HotelsForm = () => {
                 disabled
                 id="hotel-country"
                 name="country"
-                label="Country"
-                value={ relativeCountry ? relativeCountry.name : "City has not been selected" } />
+                label={t("form.country")}
+                value={ relativeCountry ? relativeCountry.name : t('form.citySelectError') } />
             <TextField
                 required
                 id="hotel-address"
                 name="address"
-                label="Hotel address"
+                label={t("form.hotelAddress")}
                 value={formik.values.address}
                 onChange={formik.handleChange}
                 inputProps={{ maxLength: 60 }} />
@@ -80,7 +82,7 @@ export const HotelsForm = () => {
                 required
                 id="hotel-price"
                 name="price"
-                label="Price"
+                label={t("form.price")}
                 value={formik.values.price}
                 onChange={formik.handleChange}
                 inputProps={{ min: 0 }}/>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { useTranslation } from 'react-i18next';
 
 import { Table } from "Common/Table";
 import { HotelModal } from "./HotelModal";
@@ -11,6 +12,7 @@ export const HotelsTable = () => {
     const hotels = hotelsWithRelations();
     const [selectedRecord, setSelectedRecord] = useState<any>();
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
 
     const handleOpen = (row: any) => {
         setSelectedRecord(row)
@@ -20,12 +22,12 @@ export const HotelsTable = () => {
     const handleClose = () => setOpen(false);
 
     const columns = [
-        <span key="Name">Name</span>,
-        <span key="Price">Price</span>,
-        <span key="Address">Address</span>,
-        <span key="City">City</span>,
-        <span key="Country">Country</span>,
-        <span key="Edit" style={editCellStyle}>Edit</span>,
+        <span key="Name">{t("name")}</span>,
+        <span key="Price">{t("price")}</span>,
+        <span key="Address">{t("address")}</span>,
+        <span key="City">{t("city")}</span>,
+        <span key="Country">{t("country")}</span>,
+        <span key="Edit" style={editCellStyle}>{t("edit")}</span>,
         ]
 
     const rows = hotels.map((hotel) => [

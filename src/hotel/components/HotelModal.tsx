@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useState } from 'react';
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import { HotelModalProps } from "../types";
 import store from "Store/store";
@@ -17,6 +18,7 @@ import { createInitialModalState } from "Hotel/consts";
 export const HotelModal = (props: HotelModalProps) => {
 
     const { record, open, handleClose } = props
+    const { t } = useTranslation();
 
     const cities = citiesWithRelations()
 
@@ -42,7 +44,7 @@ export const HotelModal = (props: HotelModalProps) => {
         setRelativeCountry(country)
     }
 
-    const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
+    const closeButton = <Button color="error" onClick={() => handleClose() } >{t("button.cancel")}</Button>
 
     return(
         <Modal open={open} handleClose={handleClose} >
@@ -51,7 +53,7 @@ export const HotelModal = (props: HotelModalProps) => {
                     required
                     id="hotel-name"
                     name="name"
-                    label="Hotel name"
+                    label={t("form.hotel")}
                     value={ formik.values.name }
                     onChange={ formik.handleChange }
                     inputProps={{ maxLength: 30 }}
@@ -60,10 +62,10 @@ export const HotelModal = (props: HotelModalProps) => {
                     required
                     id="hotel-city"
                     name="city"
-                    label="City"
+                    label={t("form.city")}
                     value={ formik.values.city }
                     options={ cities }
-                    helperText="Please select city"
+                    helperText={t("form.citySelectHelp")}
                     onChangeEvent={ (e) => {
                         formik.handleChange(e)
                         handleCityUpdate(e.target.value)
@@ -72,14 +74,14 @@ export const HotelModal = (props: HotelModalProps) => {
                     disabled
                     id="hotel-country"
                     name="country"
-                    label="Country"
+                    label={t("form.country")}
                     inputProps={{ shrink: true }}
-                    value={ relativeCountry ? relativeCountry.name : "City has not been selected" } />
+                    value={ relativeCountry ? relativeCountry.name : t("form.citySelectError") } />
                 <TextField
                     required
                     id="hotel-address"
                     name="address"
-                    label="Hotel address"
+                    label={t("form.hotelAddress")}
                     value={ formik.values.address }
                     onChange={ formik.handleChange }
                     inputProps={{ maxLength: 60 }}
@@ -88,7 +90,7 @@ export const HotelModal = (props: HotelModalProps) => {
                     required
                     id="hotel-price"
                     name="price"
-                    label="Price"
+                    label={t("form.price")}
                     value={ formik.values.price }
                     onChange={ formik.handleChange }
                     inputProps={{ min: 0 }}

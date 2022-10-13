@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   output: {
@@ -11,6 +12,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+          { from: path.join(__dirname, "/public/locales"), to: "locales" }
+        ]
+      }
+    )
   ],
   devServer: {
     port: 3000,
