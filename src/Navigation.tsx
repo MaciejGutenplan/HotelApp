@@ -1,13 +1,32 @@
 import React from 'react';
 import { Link as RouterLink } from "react-router-dom";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import MenuIcon from '@mui/icons-material/Menu';
+import { useTranslation } from "react-i18next";
+
+import { MenuDrawer } from "./MenuDrawer";
 
 export const Navigation = () => {
+    const { t } = useTranslation();
+
+    const [openMenu, setOpenMenu] = React.useState<boolean>(false);
+
     return(
         <Box sx={{ flexGrow: 1, paddingBottom: '10px' }}>
             <AppBar position="static">
                 <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        sx={{ mr: 2 }}
+                        onClick={() => setOpenMenu(true)}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <MenuDrawer openMenu={openMenu} setOpenMenu={setOpenMenu} />
+
                     <Typography
                         variant="h6"
                         noWrap
@@ -16,9 +35,9 @@ export const Navigation = () => {
                         className='nav-bar-title'
                     >Hotel App </Typography>
 
-                    <Button variant="outlined" style={{ color: "white" }} startIcon={<AddCircleIcon />} component={RouterLink} to="/add-hotel" >Hotel</Button>
-                    <Button variant="outlined" style={{ color: "white" }} startIcon={<AddCircleIcon />} component={RouterLink} to="/add-city" >City</Button>
-                    <Button variant="outlined" style={{ color: "white" }} startIcon={<AddCircleIcon />} component={RouterLink} to="/add-country" >Country</Button>
+                    <Button variant="outlined" style={{ color: "white" }} startIcon={<AddCircleIcon />} component={RouterLink} to="/add-hotel" >{t("navigation.hotel")}</Button>
+                    <Button variant="outlined" style={{ color: "white" }} startIcon={<AddCircleIcon />} component={RouterLink} to="/add-city" >{t("navigation.city")}</Button>
+                    <Button variant="outlined" style={{ color: "white" }} startIcon={<AddCircleIcon />} component={RouterLink} to="/add-country" >{t("navigation.country")}</Button>
                 </Toolbar>
             </AppBar>
         </Box>

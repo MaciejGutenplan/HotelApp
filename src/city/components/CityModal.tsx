@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import { CityModalProps } from "../types";
 import store, { RootState } from "Store/store";
@@ -16,6 +17,7 @@ export const CityModal = (props: CityModalProps) => {
 
     const { record, open, handleClose } = props
     const countries = useSelector((state: RootState) => state.countries)
+    const { t } = useTranslation();
 
     const formik = useFormik({
         initialValues: createInitialModalState(record),
@@ -29,7 +31,7 @@ export const CityModal = (props: CityModalProps) => {
         },
     });
 
-    const closeButton = <Button color="error" onClick={() => handleClose() } >Cancel</Button>
+    const closeButton = <Button color="error" onClick={() => handleClose() } >{t("button.cancel")}</Button>
 
     return(
         <Modal open={open} handleClose={handleClose} >
@@ -38,7 +40,7 @@ export const CityModal = (props: CityModalProps) => {
                     required
                     id="city-name"
                     name="name"
-                    label="City name"
+                    label={t("form.city")}
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     inputProps={{ maxLength: 30 }}
@@ -47,11 +49,11 @@ export const CityModal = (props: CityModalProps) => {
                     required
                     id="city-country"
                     name="country"
-                    label="Country"
+                    label={t("form.country")}
                     value={formik.values.country}
                     onChangeEvent={formik.handleChange}
                     options={countries}
-                    helperText="Please select country"/>
+                    helperText={t("form.countrySelectHelp")}/>
             </Form>
         </Modal>
     )

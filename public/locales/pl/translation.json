@@ -1,0 +1,29 @@
+{
+  "name": "Nazwa",
+  "price": "Cena",
+  "address": "Adres",
+  "city": "Miasto",
+  "country": "Kraj",
+  "edit": "Edycja",
+  "actions": "Akcje",
+  "navigation": {
+    "hotel": "HOTEL",
+    "city": "MIASTO",
+    "country": "KRAJ",
+    "language": "Język"
+  },
+  "form": {
+    "hotel": "Nazwa hotelu",
+    "city": "Nazwa miasta",
+    "citySelectHelp": "Proszę wybrać miasto",
+    "citySelectError": "Miasto nie zostało wybrane",
+    "country": "Nazwa kraju",
+    "countrySelectHelp": "Proszę wybrać kraj",
+    "hotelAddress": "Adres hotelu",
+    "price": "Cena"
+  },
+  "button": {
+    "submit": "Wyślij",
+    "cancel": "Anuluj"
+  }
+}

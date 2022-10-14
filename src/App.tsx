@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,25 +18,28 @@ import store from "./store/store";
 import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "./constants/routes";
 import { ErrorBoundary as ErrorFallback } from "./ErrorBoundary";
 import ProtectedRoute from "./ProtectedRoute";
+import Loader from "Common/Loader";
 
 const App = () => {
   return (
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Provider store={store}>
-          <Router>
+      <Suspense fallback={<Loader />}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Provider store={store}>
+            <Router>
 
-          <Navigation />
+              <Navigation />
 
-          <Routes>
-            <Route path={HOME_PAGE} element={ <ProtectedRoute isAllowed={true}> <Home /> </ProtectedRoute>} />
-            <Route path={ADD_HOTEL_FORM} element={ <ProtectedRoute isAllowed={true}> <AddHotelForm /> </ProtectedRoute>} />
-            <Route path={ADD_CITY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCityForm /> </ProtectedRoute>} />
-            <Route path={ADD_COUNTRY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCountryForm /> </ProtectedRoute>} />
-            <Route path="*" element={<NotFound />}/>
-          </Routes>
-        </Router>
-      </Provider>
-    </ErrorBoundary>
+              <Routes>
+                <Route path={HOME_PAGE} element={ <ProtectedRoute isAllowed={true}> <Home /> </ProtectedRoute>} />
+                <Route path={ADD_HOTEL_FORM} element={ <ProtectedRoute isAllowed={true}> <AddHotelForm /> </ProtectedRoute>} />
+                <Route path={ADD_CITY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCityForm /> </ProtectedRoute>} />
+                <Route path={ADD_COUNTRY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCountryForm /> </ProtectedRoute>} />
+                <Route path="*" element={<NotFound />}/>
+              </Routes>
+            </Router>
+          </Provider>
+        </ErrorBoundary>
+      </Suspense>
   )
 };
 
