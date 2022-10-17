@@ -10,7 +10,8 @@
     "hotel": "HOTEL",
     "city": "CITY",
     "country": "COUNTRY",
-    "language": "Language"
+    "language": "Language",
+    "theme": "Dark theme"
   },
   "form": {
     "hotel": "Hotel name",

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ErrorBoundary } from 'react-error-boundary'
+import { ThemeProvider, createTheme, Paper } from "@mui/material";
 
 import { HotelsForm as AddHotelForm } from "./hotel/components/HotelsForm";
 import { CountriesForm as AddCountryForm } from "./country/components/CountriesForm";
@@ -21,25 +22,32 @@ import ProtectedRoute from "./ProtectedRoute";
 import Loader from "Common/Loader";
 
 const App = () => {
+  const storageTheme = localStorage.getItem("appTheme");
+  const [mode, setMode] = useState(storageTheme === null ? "light" : JSON.parse(storageTheme).mode)
+  const theme = createTheme({ palette: { mode } });
+
   return (
-      <Suspense fallback={<Loader />}>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Provider store={store}>
-            <Router>
+      <ThemeProvider theme={theme} >
+        <Suspense fallback={<Loader />}>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Provider store={store}>
+              <Router>
+                <Paper sx={{ height: '100%', minHeight: '100vh' }}>
+                  <Navigation setMode={setMode}/>
 
-              <Navigation />
-
-              <Routes>
-                <Route path={HOME_PAGE} element={ <ProtectedRoute isAllowed={true}> <Home /> </ProtectedRoute>} />
-                <Route path={ADD_HOTEL_FORM} element={ <ProtectedRoute isAllowed={true}> <AddHotelForm /> </ProtectedRoute>} />
-                <Route path={ADD_CITY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCityForm /> </ProtectedRoute>} />
-                <Route path={ADD_COUNTRY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCountryForm /> </ProtectedRoute>} />
-                <Route path="*" element={<NotFound />}/>
-              </Routes>
-            </Router>
-          </Provider>
-        </ErrorBoundary>
-      </Suspense>
+                  <Routes>
+                    <Route path={HOME_PAGE} element={ <ProtectedRoute isAllowed={true}> <Home /> </ProtectedRoute>} />
+                    <Route path={ADD_HOTEL_FORM} element={ <ProtectedRoute isAllowed={true}> <AddHotelForm /> </ProtectedRoute>} />
+                    <Route path={ADD_CITY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCityForm /> </ProtectedRoute>} />
+                    <Route path={ADD_COUNTRY_FORM} element={ <ProtectedRoute isAllowed={true}> <AddCountryForm /> </ProtectedRoute>} />
+                    <Route path="*" element={<NotFound />}/>
+                  </Routes>
+                </Paper>
+              </Router>
+            </Provider>
+          </ErrorBoundary>
+        </Suspense>
+      </ThemeProvider>
   )
 };
 

@@ -10,7 +10,8 @@
     "hotel": "HOTEL",
     "city": "MIASTO",
     "country": "KRAJ",
-    "language": "Język"
+    "language": "Język",
+    "theme": "Ciemny styl"
   },
   "form": {
     "hotel": "Nazwa hotelu",

@@ -7,7 +7,11 @@ import { useTranslation } from "react-i18next";
 
 import { MenuDrawer } from "./MenuDrawer";
 
-export const Navigation = () => {
+type Props = {
+    setMode: (val: string) => void
+}
+
+export const Navigation = ({ setMode }: Props) => {
     const { t } = useTranslation();
 
     const [openMenu, setOpenMenu] = React.useState<boolean>(false);
@@ -25,7 +29,7 @@ export const Navigation = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <MenuDrawer openMenu={openMenu} setOpenMenu={setOpenMenu} />
+                    <MenuDrawer openMenu={openMenu} setOpenMenu={setOpenMenu} setMode={setMode}/>
 
                     <Typography
                         variant="h6"
