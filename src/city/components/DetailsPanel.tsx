@@ -6,8 +6,10 @@ import { DetailsPanelProps } from "City/types";
 import { browserDetailPanelStyle, smallPhoneDetailsPanelStyle } from "City/styles";
 import { detailsPanelCloseButton, detailsPanelContainer } from "Common/styles";
 import useWindow from "Hooks/useWindow";
+import store from "Store/store";
+import { unsetRecord } from "Store/common/actions";
 
-export const DetailsPanel = ({ city, setDetailsPanel }: DetailsPanelProps) => {
+export const DetailsPanel = ({ city }: DetailsPanelProps) => {
     const { width } = useWindow();
 
     const panelStyle = width > 425 ? browserDetailPanelStyle  : smallPhoneDetailsPanelStyle
@@ -25,7 +27,7 @@ export const DetailsPanel = ({ city, setDetailsPanel }: DetailsPanelProps) => {
                         <span>{city.country.name}</span>
                     </Grid>
                     <Grid item xs>
-                        <IconButton sx={detailsPanelCloseButton} onClick={() => setDetailsPanel(null)}>
+                        <IconButton sx={detailsPanelCloseButton} onClick={() => store.dispatch(unsetRecord())}>
                             <CloseIcon />
                         </IconButton>
                     </Grid>

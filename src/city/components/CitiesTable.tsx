@@ -3,24 +3,28 @@ import { useTranslation } from "react-i18next";
 import {IconButton, Tooltip} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
+import { useSelector } from "react-redux";
 
 import { Table } from "Common/Table";
-import { CityModal } from "./CityModal";
-import { citiesWithRelations } from "Store/city/actions";
+import { HomePortal } from "Common/HomePortal";
 import { actionCellStyle } from "Common/styles";
-import { CityTableProps } from "City/types";
+import { CityModal } from "./CityModal";
+import { citiesWithRelations} from "Store/city/actions";
+import store, {RootState} from "Store/store";
+import { setRecord } from "Store/common/actions";
+import { PopulatedCity} from "City/types";
 import { DetailsPanel } from "City/components/DetailsPanel";
 import { LIGHT_BLUE } from "Constants/colors";
 
-export const CitiesTable = ({ setDetailsPanel }: CityTableProps) => {
+export const CitiesTable = () => {
     const cities = citiesWithRelations()
 
-    const [selectedRecord, setSelectedRecord] = useState<any>();
+    const selectedRecord = useSelector((state: RootState) => state.selectedRecord?.type === 'city' ? state.selectedRecord as PopulatedCity : null)
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
 
     const handleOpen = (row: any) => {
-        setSelectedRecord(row)
+        store.dispatch(setRecord(row, 'city'))
         setOpen(true)
     };
 
@@ -37,7 +41,7 @@ export const CitiesTable = ({ setDetailsPanel }: CityTableProps) => {
         <span key={city.country.name}>{city.country.name}</span>,
         <span key="edit-icon" style={actionCellStyle}>
             <Tooltip title={t('details')}>
-                <IconButton onClick={() => setDetailsPanel(<DetailsPanel city={city} setDetailsPanel={setDetailsPanel} />)}>
+                <IconButton onClick={() => store.dispatch(setRecord(city, 'city'))}>
                     <InfoIcon />
                 </IconButton>
             </Tooltip>
@@ -53,6 +57,7 @@ export const CitiesTable = ({ setDetailsPanel }: CityTableProps) => {
         <>
             <Table columns={columns} rows={rows} titleBarColor={LIGHT_BLUE}/>
             { selectedRecord && <CityModal record={selectedRecord} open={open} handleClose={handleClose}/> }
+            { selectedRecord && <HomePortal> <DetailsPanel city={selectedRecord} /> </HomePortal> }
         </>
     )
 }

@@ -1,5 +1,3 @@
-import React, { SetStateAction } from "react";
-
 import { Country } from "Country/types";
 import { City } from "City/types";
 
@@ -27,11 +25,6 @@ export type HotelModalProps = {
     handleClose: () => any;
 }
 
-export type HotelTableProps = {
-    setDetailsPanel: React.Dispatch<SetStateAction<React.ReactNode>>;
-}
-
 export type DetailsPanelProps = {
     hotel: PopulatedHotel;
-    setDetailsPanel: React.Dispatch<SetStateAction<React.ReactNode | null>>
 }

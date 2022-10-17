@@ -6,22 +6,24 @@ import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
 
 import { Table } from "Common/Table";
-import { RootState } from "Store/store";
-import { CountryModal } from "./CountryModal";
+import { HomePortal } from "Common/HomePortal";
 import { actionCellStyle } from "Common/styles";
-import { CountryTableProps } from "Country/types";
+import store, { RootState } from "Store/store";
+import {setRecord} from "Store/common/actions";
+import { CountryModal } from "./CountryModal";
+import { Country } from "Country/types";
 import { DetailsPanel } from "Country/components/DetailsPanel";
 import { LIGHT_GREY } from "Constants/colors";
 
-export const CountriesTable = ({ setDetailsPanel }: CountryTableProps) => {
+export const CountriesTable = () => {
     const countries = useSelector((state: RootState) => state.countries)
     const { t } = useTranslation();
 
-    const [selectedRecord, setSelectedRecord] = useState<any>();
+    const selectedRecord = useSelector((state: RootState) => state.selectedRecord?.type === 'country' ? state.selectedRecord as Country : null)
     const [open, setOpen] = useState(false);
 
     const handleOpen = (row: any) => {
-        setSelectedRecord(row)
+        store.dispatch(setRecord(row, 'country'))
         setOpen(true)
     };
 
@@ -36,7 +38,7 @@ export const CountriesTable = ({ setDetailsPanel }: CountryTableProps) => {
         <span key={country.name}>{country.name}</span>,
         <span key="edit-icon" style={actionCellStyle}>
             <Tooltip title={t('details')}>
-                <IconButton onClick={() => setDetailsPanel(<DetailsPanel country={country} setDetailsPanel={setDetailsPanel} />)}>
+                <IconButton onClick={() => store.dispatch(setRecord(country, 'country'))}>
                     <InfoIcon />
                 </IconButton>
             </Tooltip>
@@ -52,6 +54,7 @@ export const CountriesTable = ({ setDetailsPanel }: CountryTableProps) => {
         <>
             <Table columns={columns} rows={rows} titleBarColor={LIGHT_GREY}/>
             { selectedRecord && <CountryModal record={selectedRecord} open={open} handleClose={handleClose}/> }
+            { selectedRecord && <HomePortal> <DetailsPanel country={selectedRecord} /> </HomePortal> }
         </>
     )
 }
