@@ -21,6 +21,8 @@
       "City/*": ["src/city/*"],
       "Country/*": ["src/country/*"],
       "Common/*": ["src/common/*"],
+      "Constants/*": ["src/constants/*"],
+      "Hooks/*": ["src/hooks/*"],
       "Store/*": ["src/store/*"]
     },
   },

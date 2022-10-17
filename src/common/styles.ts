@@ -24,6 +24,19 @@ export const formStyle = {
     '& .MuiTextField-root': { m: 1, width: '25ch' }
 }
 
-export const editCellStyle: CSS.Properties = {
+export const actionCellStyle: CSS.Properties = {
+    float: 'right'
+}
+
+export const detailsPanelContainer = {
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1,
+    width: '100%',
+    fontSize: '15px'
+}
+
+export const detailsPanelCloseButton = {
+    padding: 0,
     float: 'right'
 }

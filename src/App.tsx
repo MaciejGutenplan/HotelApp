@@ -15,7 +15,7 @@ import { Home } from "./Home";
 import { Navigation } from "./Navigation";
 import { NotFound } from "./NotFound";
 import store from "./store/store";
-import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "./constants/routes";
+import { ADD_CITY_FORM, ADD_COUNTRY_FORM, ADD_HOTEL_FORM, HOME_PAGE } from "Constants/routes";
 import { ErrorBoundary as ErrorFallback } from "./ErrorBoundary";
 import ProtectedRoute from "./ProtectedRoute";
 import Loader from "Common/Loader";

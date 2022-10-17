@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-import { IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
+import {IconButton, Tooltip} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import InfoIcon from "@mui/icons-material/Info";
+import { useSelector } from "react-redux";
 
 import { Table } from "Common/Table";
+import { HomePortal } from "Common/HomePortal";
+import { actionCellStyle } from "Common/styles";
 import { CityModal } from "./CityModal";
-import { citiesWithRelations } from "Store/city/actions";
-import {editCellStyle} from "Common/styles";
+import { citiesWithRelations} from "Store/city/actions";
+import store, {RootState} from "Store/store";
+import { setRecord } from "Store/common/actions";
+import { PopulatedCity} from "City/types";
+import { DetailsPanel } from "City/components/DetailsPanel";
+import { LIGHT_BLUE } from "Constants/colors";
 
 export const CitiesTable = () => {
     const cities = citiesWithRelations()
 
-    const [selectedRecord, setSelectedRecord] = useState<any>();
+    const selectedRecord = useSelector((state: RootState) => state.selectedRecord?.type === 'city' ? state.selectedRecord as PopulatedCity : null)
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
 
     const handleOpen = (row: any) => {
-        setSelectedRecord(row)
+        store.dispatch(setRecord(row, 'city'))
         setOpen(true)
     };
 
@@ -25,23 +33,31 @@ export const CitiesTable = () => {
     const columns = [
         <span key="Name">{t("name")}</span>,
         <span key="Country">{t("country")}</span>,
-        <span key="Edit" style={editCellStyle}>{t("edit")}</span>,
+        <span key="Actions" style={actionCellStyle}>{t("actions")}</span>,
     ]
 
     const rows = cities.map((city) => [
         <span key={city.name}>{city.name}</span>,
         <span key={city.country.name}>{city.country.name}</span>,
-        <span key="edit-icon" style={editCellStyle}>
-            <IconButton onClick={() => handleOpen(city)}>
-                <EditIcon />
-            </IconButton>
+        <span key="edit-icon" style={actionCellStyle}>
+            <Tooltip title={t('details')}>
+                <IconButton onClick={() => store.dispatch(setRecord(city, 'city'))}>
+                    <InfoIcon />
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={t('edit')}>
+                <IconButton onClick={() => handleOpen(city)}>
+                    <EditIcon />
+                </IconButton>
+            </Tooltip>
         </span>]
     )
 
     return (
         <>
-            <Table columns={columns} rows={rows} />
+            <Table columns={columns} rows={rows} titleBarColor={LIGHT_BLUE}/>
             { selectedRecord && <CityModal record={selectedRecord} open={open} handleClose={handleClose}/> }
+            { selectedRecord && <HomePortal> <DetailsPanel city={selectedRecord} /> </HomePortal> }
         </>
     )
 }

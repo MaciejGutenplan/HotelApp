@@ -8,3 +8,7 @@ export type CountryModalProps = {
     open: boolean,
     handleClose: () => any
 }
+
+export type DetailsPanelProps = {
+    country: Country;
+}

@@ -17,3 +17,7 @@ export type CityModalProps = {
     open: boolean,
     handleClose: () => any
 }
+
+export type DetailsPanelProps = {
+    city: PopulatedCity;
+}

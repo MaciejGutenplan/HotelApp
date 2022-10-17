@@ -3,6 +3,7 @@ import React, { ChangeEvent, FormEvent } from "react";
 export type TableData = {
     columns: React.ReactNode[];
     rows: React.ReactNode[][];
+    titleBarColor?: string;
 }
 
 export type TextFieldProps = {

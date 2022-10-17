@@ -19,16 +19,12 @@ export type PopulatedHotel = {
     city: City;
 }
 
-export type HotelPayload = {
-    name: { value: string },
-    address: { value: string },
-    price: { value: number },
-    country: { value: string },
-    city: { value: number }
-}
-
 export type HotelModalProps = {
     record: PopulatedHotel;
     open: boolean;
     handleClose: () => any;
+}
+
+export type DetailsPanelProps = {
+    hotel: PopulatedHotel;
 }

@@ -31,6 +31,8 @@ module.exports = {
       Country: path.resolve(__dirname, 'src/country/'),
       Common: path.resolve(__dirname, 'src/common/'),
       Store: path.resolve(__dirname, 'src/store/'),
+      Constants: path.resolve(__dirname, 'src/constants/'),
+      Hooks: path.resolve(__dirname, 'src/hooks/'),
     },
   },
   module: {
